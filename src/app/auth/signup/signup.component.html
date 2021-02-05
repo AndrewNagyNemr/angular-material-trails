@@ -2,10 +2,11 @@
   <form
     fxLayout="column"
     fxLayoutAlign="center center"
+    fxLayoutGap="10px"
     #f="ngForm"
     (ngSubmit)="submit(f)"
   >
-    <mat-form-field>
+    <mat-form-field hintLabel="Enter a valid E-Mail">
       <input
         ngModel
         name="email"
@@ -42,6 +43,44 @@
         >Password must be at least 6 characters
       </mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <mat-form-field>
+      <input
+        ngModel
+        name="confirmPassword"
+        type="password"
+        matInput
+        placeholder="Confirm Password"
+        required
+        #confirmInput="ngModel"
+      />
+      <mat-error *ngIf="confirmInput.hasError('required')"
+        >Confirm Password is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        ngModel
+        name="birthDate"
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Birth Date"
+        [max]="maxDate"
+        [min]="minDate"
+        required
+        #birthInput="ngModel"
+      />
+      <mat-error *ngIf="birthInput.hasError('required')"
+        >Birth date is required</mat-error
+      >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-checkbox color="primary" ngModel name="agree" required #agreeInput="ngModel"
+      >Agree to our terms and conditions
+    </mat-checkbox>
+    <!-- <mat-error *ngIf="agreeInput.hasError('required') && agreeInput.touched"
+      >You Must agree to our terms and conditions</mat-error
+    > -->
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
   </form>
 </section>

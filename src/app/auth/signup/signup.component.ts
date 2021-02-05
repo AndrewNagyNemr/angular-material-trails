@@ -8,9 +8,18 @@ import { NgForm } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
 
+  maxDate;
+  minDate;
+
   constructor() { }
 
   ngOnInit(): void {
+    //To set max birth date 21 years ago
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 21)
+    //To set min birth date 90 years ago
+    this.minDate = new Date();
+    this.minDate.setFullYear(this.minDate.getFullYear() - 90)
   }
 
   submit(form : NgForm){
